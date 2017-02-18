@@ -14,8 +14,8 @@ The following **required** functionality is completed:
 
 4\. [ ]  Required: Complete Staff CMS for Salespeople
   * [x]  Required: index.php
-  * [ ]  Required: show.php
-  * [ ]  Required: new.php
+  * [x]  Required: show.php
+  * [x]  Required: new.php
   * [ ]  Required: edit.php
 
 5\. [ ]  Required: Complete Staff CMS for States
