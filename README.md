@@ -19,7 +19,7 @@ The following **required** functionality is completed:
   * [x]  Required: edit.php
 
 5\. [ ]  Required: Complete Staff CMS for States
-  * [ ]  Required: index.php
+  * [x]  Required: index.php
   * [ ]  Required: show.php
   * [ ]  Required: new.php
   * [ ]  Required: edit.php
