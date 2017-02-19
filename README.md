@@ -25,7 +25,7 @@ The following **required** functionality is completed:
   * [x]  Required: edit.php
 
 6\. [ ]  Required: Complete Staff CMS for Territories
-  * [ ]  Required: index.php
+  * [x]  Required: index.php
   * [ ]  Required: show.php
   * [ ]  Required: new.php
   * [ ]  Required: edit.php
