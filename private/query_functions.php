@@ -146,6 +146,23 @@
 
   function validate_territory($territory, $errors=array()) {
     // TODO add validations
+    if (is_blank($territory['name'])) {
+      $errors[] = "Name cannot be blank.";
+    } elseif (!has_length($territory['name'], array('min' => 2, 'max' => 255))) {
+      $errors[] = "Name must be between 2 and 255 characters.";
+    }
+
+    if (is_blank($territory['position'])) {
+      $errors[] = "Position cannot be blank.";
+    } elseif (!has_length($territory['position'], array('min' => 2, 'max' => 255))) {
+      $errors[] = "Position must be between 2 and 255 characters.";
+    }
+
+    if (is_blank($territory['state_id'])) {
+      $errors[] = "State id cannot be blank.";
+    } elseif (!has_length($territory['state_id'], array('min' => 2, 'max' => 255))) {
+      $errors[] = "State id must be between 2 and 255 characters.";
+    }
 
     return $errors;
   }
@@ -160,8 +177,8 @@
       return $errors;
     }
 
-    $sql = ""; // TODO add SQL
-    // For INSERT statments, $result is just true/false
+    $sql = "INSERT INTO territories (name, position, state_id)";
+    $sql .= "VALUES ('".$territory['name']."', '".$territory['position']."', '".$territory['state_id']."')";    // For INSERT statments, $result is just true/false
     $result = db_query($db, $sql);
     if($result) {
       return true;
@@ -184,7 +201,11 @@
       return $errors;
     }
 
-    $sql = ""; // TODO add SQL
+    $sql = "UPDATE territories SET ";
+    $sql .= "name='" . $territory['name'] . "', ";
+    $sql .= "position='" . $territory['position'] . "' ";
+    $sql .= "WHERE id='" . $territory['id'] . "' ";
+    $sql .= "LIMIT 1;";
     // For update_territory statments, $result is just true/false
     $result = db_query($db, $sql);
     if($result) {
