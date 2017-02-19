@@ -6,8 +6,12 @@ if(!isset($_GET['id'])) {
 }
 $id = $_GET['id'];
 $salespeople_result = find_salesperson_by_id($id);
+if (db_num_rows($salespeople_result) === 0) { // If no entries found
+  redirect_to('index.php');
+}
 // No loop, only one result
 $salesperson = db_fetch_assoc($salespeople_result);
+
 ?>
 
 <?php $page_title = 'Staff: Salesperson ' . $salesperson['first_name'] . " " . $salesperson['last_name']; ?>

@@ -6,7 +6,7 @@ $errors = array();
 $salesperson = array(
   'first_name' => '',
   'last_name' => '',
-  'username' => '',
+  'phone' => '',
   'email' => ''
 );
 
