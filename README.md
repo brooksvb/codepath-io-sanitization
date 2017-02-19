@@ -12,11 +12,11 @@ The following **required** functionality is completed:
 
 3\. [x]  Required: Review code for Staff CMS for Users
 
-4\. [ ]  Required: Complete Staff CMS for Salespeople
+4\. [x]  Required: Complete Staff CMS for Salespeople
   * [x]  Required: index.php
   * [x]  Required: show.php
   * [x]  Required: new.php
-  * [ ]  Required: edit.php
+  * [x]  Required: edit.php
 
 5\. [ ]  Required: Complete Staff CMS for States
   * [ ]  Required: index.php
@@ -79,7 +79,7 @@ Describe any challenges encountered while building the app.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2017] [William Brooks Van Buren]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
