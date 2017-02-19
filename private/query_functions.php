@@ -160,8 +160,8 @@
 
     if (is_blank($territory['state_id'])) {
       $errors[] = "State id cannot be blank.";
-    } elseif (!has_length($territory['state_id'], array('min' => 2, 'max' => 255))) {
-      $errors[] = "State id must be between 2 and 255 characters.";
+    } elseif (!has_length($territory['state_id'], array('min' => 1, 'max' => 255))) {
+      $errors[] = "State id must be between 1 and 255 characters.";
     }
 
     return $errors;

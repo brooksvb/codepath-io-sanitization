@@ -15,7 +15,7 @@ $state_id = $territory['state_id'];
 <?php include(SHARED_PATH . '/header.php'); ?>
 
 <div id="main-content">
-  <a href="#add_a_url">Back to State Details</a>
+  <a href="../states/show.php?id=<?php echo $territory['state_id']; ?>">Back to State Details</a>
   <br />
 
   <h1>Territory: <?php echo $territory['name']; ?></h1>

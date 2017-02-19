@@ -14,18 +14,19 @@ $territory = array(
 );
 
 if (isset($_GET['id'])) {
-  $territory['state_id'] = $_GET['id'];
+  $id = $_GET['id'];
 }
 
 if(is_post_request()) {
 
   // Confirm that values are present before accessing them.
   if(isset($_POST['name'])) { $territory['name'] = $_POST['name']; }
-  if(isset($_POST['code'])) { $territory['code'] = $_POST['code']; }
-  if(isset($_POST['state_id'])) {
-    $territory['state_id'] = $_POST['state_id'];
+  if(isset($_POST['position'])) { $territory['position'] = $_POST['position']; }
+  if(isset($_GET['id'])) {
+    $territory['state_id'] = $_GET['id'];
+    $id = $territory['state_id'];
   } else {
-    redirect_to('../states/index.php'); // The post request has no state_id context
+    // redirect_to('../states/index.php'); // The post request has no state_id context
   }
 
   $result = insert_territory($territory);
@@ -42,13 +43,13 @@ if(is_post_request()) {
 <?php include(SHARED_PATH . '/header.php'); ?>
 
 <div id="main-content">
-  <a href="#add_a_url">Back to State Details</a><br />
+  <a href="../states/show.php?id=<?php echo $id; ?>">Back to State Details</a><br />
 
   <h1>New Territory</h1>
 
   <?php echo display_errors($errors); ?>
 
-  <form action="new.php?id=<?php echo $territory['id']; ?>" method="post">
+  <form action="new.php?id=<?php echo $id; ?>" method="post">
     Name:<br />
     <input type="text" name="name" value="<?php echo $territory['name']; ?>" /><br />
     Position:<br />
