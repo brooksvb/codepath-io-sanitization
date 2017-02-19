@@ -236,7 +236,8 @@
       return $errors;
     }
 
-    $sql = ""; // TODO add SQL
+    $sql = "INSERT INTO salespeople (first_name, last_name, phone, email)";
+    $sql .= "VALUES ('".$salesperson['first_name']."', '".$salesperson['last_name']."', '".$salesperson['phone']."', '".$salesperson['email']."')";
     // For INSERT statments, $result is just true/false
     $result = db_query($db, $sql);
     if($result) {
