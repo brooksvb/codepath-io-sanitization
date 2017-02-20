@@ -10,7 +10,6 @@ if (db_num_rows($salespeople_result) === 0) { // If no entries found
 }
 // No loop, only one result
 $salesperson = db_fetch_assoc($salespeople_result);
-obj_o($salesperson);
 
 // Set default values for all variables the page needs.
 $errors = array();

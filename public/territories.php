@@ -22,7 +22,6 @@
     echo "<ul id=\"states\">";
     // Loop through state results
     while($state = db_fetch_assoc($state_result)) {
-      obj_o($state);
       echo "<li>";
       // Output state name
       echo h($state['name']);

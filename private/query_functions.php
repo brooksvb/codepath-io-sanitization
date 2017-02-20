@@ -279,7 +279,6 @@
     $sql = "SELECT * FROM salespeople ";
     $sql .= "WHERE id='" . i($id) . "';";
     $salespeople_result = db_query($db, $sql);
-    $salespeople_result = obj_o($salespeople_result);
     return $salespeople_result;
   }
 
