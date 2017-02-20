@@ -42,7 +42,7 @@ if(is_post_request()) {
 
   <?php echo display_errors($errors); ?>
 
-  <form action="new.php?id=<?php echo u($id); ?>" method="post">
+  <form action="new.php?id=<?php echo u($_GET['id']); ?>" method="post">
     Name:<br />
     <input type="text" name="name" value="<?php echo $territory['name']; ?>" /><br />
     Position:<br />
