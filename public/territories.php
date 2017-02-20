@@ -22,6 +22,7 @@
     echo "<ul id=\"states\">";
     // Loop through state results
     while($state = db_fetch_assoc($state_result)) {
+      obj_o($state);
       echo "<li>";
       // Output state name
       echo h($state['name']);
@@ -32,6 +33,7 @@
       echo "<ul id=\"territories\">";
       // Loop through territory results
       while($territory = db_fetch_assoc($territory_result)) {
+        obj_o($territory);
         echo "<li>";
         // Output territory name (if different from state)
         if($territory['name'] != $state['name']) {
@@ -41,6 +43,7 @@
         $salespeople_result = find_salespeople_for_territory_id($territory['id']);
 
         while($person = db_fetch_assoc($salespeople_result)) {
+          obj_o($person);
           echo "<span class=\"salesperson\">";
           $url = 'salesperson.php?id=' . u($person['id']);
           echo "<a href=\"" . h($url) . "\">";

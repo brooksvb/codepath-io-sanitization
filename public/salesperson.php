@@ -49,6 +49,7 @@
         $territories_result = find_territories_by_salesperson_id($id);
         echo "<ul id=\"territories\">";
         while($territory = db_fetch_assoc($territories_result)) {
+          obj_o($territory);
           echo "<li>" . h($territory['name']) . "</li>";
         }
         db_free_result($territories_result);
