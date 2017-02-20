@@ -51,7 +51,6 @@
     $sql = "SELECT * FROM states ";
     $sql .= "WHERE id='" . $id . "';";
     $state_result = db_query($db, $sql);
-    $state_result = obj_o($state_result);
     return $state_result;
   }
 
@@ -157,12 +156,10 @@
     $sql = "SELECT * FROM territories ";
     $sql .= "WHERE id='" . $id . "';";
     $territory_result = db_query($db, $sql);
-    $territory_result = obj_o($territory_result);
     return $territory_result;
   }
 
   function validate_territory($territory, $errors=array()) {
-    // TODO add validations
     if (is_blank($territory['name'])) {
       $errors[] = "Name cannot be blank.";
     } elseif (!has_length($territory['name'], array('min' => 2, 'max' => 25))) {
@@ -416,7 +413,6 @@
     $sql = db_escape($db, $sql);
 
     $users_result = db_query($db, $sql);
-    $users_result = obj_o($users_result);
     return $users_result;
   }
 
