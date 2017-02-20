@@ -51,6 +51,7 @@
     $sql = "SELECT * FROM states ";
     $sql .= "WHERE id='" . $id . "';";
     $state_result = db_query($db, $sql);
+    $state_result = obj_o($state_result);
     return $state_result;
   }
 
@@ -156,6 +157,7 @@
     $sql = "SELECT * FROM territories ";
     $sql .= "WHERE id='" . $id . "';";
     $territory_result = db_query($db, $sql);
+    $territory_result = obj_o($territory_result);
     return $territory_result;
   }
 
@@ -277,6 +279,7 @@
     $sql = "SELECT * FROM salespeople ";
     $sql .= "WHERE id='" . i($id) . "';";
     $salespeople_result = db_query($db, $sql);
+    $salespeople_result = obj_o($salespeople_result);
     return $salespeople_result;
   }
 
@@ -408,6 +411,7 @@
     global $db;
     $sql = "SELECT * FROM users WHERE id='" . i($id) . "' LIMIT 1;";
     $users_result = db_query($db, $sql);
+    $users_result = obj_o($users_result);
     return $users_result;
   }
 

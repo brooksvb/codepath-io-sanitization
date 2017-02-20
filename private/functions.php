@@ -59,4 +59,16 @@
     return $string;
   }
 
+  /*
+    @function: Sanitize every member of a given object for page output
+  */
+  function obj_o($object) {
+    foreach ($object as $value) {
+      $value = o($value);
+    }
+    // Ensure the variable values don't stick around
+    unset($value);
+    return $object;
+  }
+
 ?>

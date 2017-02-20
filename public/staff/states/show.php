@@ -50,6 +50,7 @@ $state = db_fetch_assoc($state_result);
 
     echo "<ul id=\"territories\">";
     while($territory = db_fetch_assoc($territory_result)) {
+      obj_o($territotry); // Sanitize each object first
       echo "<li>";
       echo "<a href=\"../territories/show.php?id=".$territory['id']."\">";
       echo $territory['name'];
