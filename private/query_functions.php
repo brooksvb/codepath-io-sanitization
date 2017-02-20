@@ -171,8 +171,9 @@
 
     if (is_blank($territory['position'])) {
       $errors[] = "Position cannot be blank.";
-    } elseif (!has_length($territory['position'], array('min' => 2, 'max' => 255))) {
-      $errors[] = "Position must be between 2 and 255 characters.";
+    } elseif (!has_length($territory['position'], array('min' => 1, 'max' => 40))) {
+      // My custom validation: A reasonable range for position input
+      $errors[] = "Position must be between 1 and 40 characters.";
     } else if (!valid_number_format($territory['position'])) {
       $errors[] = "Position should only contain numeric characters.";
     }
@@ -201,8 +202,8 @@
     }
 
     $sql = "INSERT INTO territories (name, position, state_id)";
-    $sql .= "VALUES ('". i($territory['name']) ."', '";
-    $sql .= i($territory['position']) ."', '". i($territory['state_id']) ."')";    // For INSERT statments, $result is just true/false
+    $sql .= "VALUES ('". db_escape($db, i($territory['name'])) ."', '";
+    $sql .= db_escape($db, i($territory['position'])) ."', '". db_escape($db, i($territory['state_id'])) ."')";    // For INSERT statments, $result is just true/false
     $result = db_query($db, $sql);
     if($result) {
       return true;
@@ -226,9 +227,9 @@
     }
 
     $sql = "UPDATE territories SET ";
-    $sql .= "name='" . i($territory['name']) . "', ";
-    $sql .= "position='" . i($territory['position']) . "' ";
-    $sql .= "WHERE id='" . i($territory['id']) . "' ";
+    $sql .= "name='" . db_escape($db, i($territory['name'])) . "', ";
+    $sql .= "position='" . db_escape($db, i($territory['position'])) . "' ";
+    $sql .= "WHERE id='" . db_escape($db, i($territory['id'])) . "' ";
     $sql .= "LIMIT 1;";
     // For update_territory statments, $result is just true/false
     $result = db_query($db, $sql);
@@ -264,7 +265,7 @@
     $sql = "SELECT * FROM salespeople ";
     $sql .= "LEFT JOIN salespeople_territories
               ON (salespeople_territories.salesperson_id = salespeople.id) ";
-    $sql .= "WHERE salespeople_territories.territory_id='" . i($territory_id) . "' ";
+    $sql .= "WHERE salespeople_territories.territory_id='" . db_escape($db, i($territory_id)) . "' ";
     $sql .= "ORDER BY last_name ASC, first_name ASC;";
     $salespeople_result = db_query($db, $sql);
     return $salespeople_result;
@@ -274,7 +275,7 @@
   function find_salesperson_by_id($id=0) {
     global $db;
     $sql = "SELECT * FROM salespeople ";
-    $sql .= "WHERE id='" . i($id) . "';";
+    $sql .= "WHERE id='" . db_escape($db, i($id)) . "';";
     $salespeople_result = db_query($db, $sql);
     return $salespeople_result;
   }

@@ -83,6 +83,9 @@ I didn't have to change anything in each page.
 This would have prevented a lot of work if I started with this approach.
 - I had a misunderstanding of how to use mysqli_real_escape_string, and used it on my
 entire sql query string, instead of each variable input
+- I missed some query data where I needed to use db_escape. I wanted to figure out an
+alternate way to structure the sql sanitization so that I don't have to type it so often
+and rely on not forgetting to sanitize some inputs.
 
 Bugs / Vulnerabilities Found:
 
@@ -94,6 +97,7 @@ for each loop was not directly referencing key values (Fixed)
 sanitization will strip them before checking format. This could be changed, but I'm not sure if it should
 be considered a great enough issue to restructure. A normal userbase should not be trying
 to type html tags in inputs.
+- Some sql queries were not properly sanitized because I missed them when adding db_escape calls. (Fixed)
 
 ## License
 
