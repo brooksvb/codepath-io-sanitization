@@ -30,7 +30,7 @@
   function valid_username_format($username) {
     // A string of 1 or more whitelisted characters
     $regexp = '/\A[A-Za-z0-9\_]+\Z/';
-    return preg_match($regexp, $username)
+    return preg_match($regexp, $username);
   }
 
   function valid_phone_format($phone) {
