@@ -21,7 +21,7 @@ if(is_post_request()) {
   if(isset($_POST['last_name'])) { $salesperson['last_name'] = $_POST['last_name']; }
   if(isset($_POST['phone'])) { $salesperson['phone'] = $_POST['phone']; }
   if(isset($_POST['email'])) { $salesperson['email'] = $_POST['email']; }
-
+  $salesperson = obj_o($salesperson);
 
   $result = update_salesperson($salesperson);
   if($result === true) {

@@ -87,7 +87,13 @@ entire sql query string, instead of each variable input
 Bugs / Vulnerabilities Found:
 
 - Putting an html tag in a name input will cause the page to not display correctly
-because the POST data is not sanitized before being redisplayed.
+because the POST data is not sanitized before being redisplayed. (Fixed)
+- My obj_o sanitization function wasn't properly sanitizing html tags, because the
+for each loop was not directly referencing key values (Fixed)
+- Attempting to inject html tags can result in a successful db entry because the
+sanitization will strip them before checking format. This could be changed, but I'm not sure if it should
+be considered a great enough issue to restructure. A normal userbase should not be trying
+to type html tags in inputs.
 
 ## License
 

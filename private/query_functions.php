@@ -111,9 +111,9 @@
     }
 
     $sql = "UPDATE states SET ";
-    $sql .= "name='" . i($state['name']) . "', ";
-    $sql .= "code='" . i($state['code']) . "' ";
-    $sql .= "WHERE id='" . i($state['id']) . "' ";
+    $sql .= "name='" . db_escape(i($state['name'])) . "', ";
+    $sql .= "code='" . db_escape(i($state['code'])) . "' ";
+    $sql .= "WHERE id='" . db_escape(i($state['id'])) . "' ";
     $sql .= "LIMIT 1;";    // For update_state statments, $result is just true/false
     $result = db_query($db, $sql);
     if($result) {

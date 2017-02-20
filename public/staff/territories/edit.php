@@ -16,6 +16,7 @@ if(is_post_request()) {
   // Confirm that values are present before accessing them.
   if(isset($_POST['name'])) { $territory['name'] = $_POST['name']; }
   if(isset($_POST['position'])) { $territory['position'] = $_POST['position']; }
+  $territory = obj_o($territory);
   // Do not change the old state_id value
 
   $result = update_territory($territory);
