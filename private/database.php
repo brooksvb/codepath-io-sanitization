@@ -27,7 +27,7 @@
   }
 
   function db_fetch_assoc($result_set) {
-    return mysqli_fetch_assoc($result_set);
+    return obj_o(mysqli_fetch_assoc($result_set));
   }
 
   function db_free_result($result_set) {
