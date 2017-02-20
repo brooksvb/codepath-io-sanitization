@@ -24,11 +24,11 @@ The following **required** functionality is completed:
   * [x]  Required: new.php
   * [x]  Required: edit.php
 
-6\. [ ]  Required: Complete Staff CMS for Territories
+6\. [x]  Required: Complete Staff CMS for Territories
   * [x]  Required: index.php
   * [x]  Required: show.php
   * [x]  Required: new.php
-  * [ ]  Required: edit.php
+  * [x]  Required: edit.php
 
 7\. [ ]  Required: Add Data Validations
   * [ ]  Required: Validate that no values are left blank.

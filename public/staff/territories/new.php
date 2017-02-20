@@ -1,7 +1,7 @@
 <?php
 require_once('../../../private/initialize.php');
 
-if (!is_post_request() && !isset($_GET['id'])) { // Must have a state id for context
+if (!isset($_GET['id'])) { // Must have a state id for context
   redirect_to('../states/index.php');
 }
 
@@ -13,21 +13,12 @@ $territory = array(
   'state_id' => ''
 );
 
-if (isset($_GET['id'])) {
-  $id = $_GET['id'];
-}
-
 if(is_post_request()) {
 
   // Confirm that values are present before accessing them.
   if(isset($_POST['name'])) { $territory['name'] = $_POST['name']; }
   if(isset($_POST['position'])) { $territory['position'] = $_POST['position']; }
-  if(isset($_GET['id'])) {
-    $territory['state_id'] = $_GET['id'];
-    $id = $territory['state_id'];
-  } else {
-    // redirect_to('../states/index.php'); // The post request has no state_id context
-  }
+  if(isset($_GET['id'])) { $territory['state_id'] = $_GET['id']; }
 
   $result = insert_territory($territory);
   if($result === true) {
@@ -43,7 +34,7 @@ if(is_post_request()) {
 <?php include(SHARED_PATH . '/header.php'); ?>
 
 <div id="main-content">
-  <a href="../states/show.php?id=<?php echo $id; ?>">Back to State Details</a><br />
+  <a href="../states/show.php?id=<?php echo $_GET['id']; ?>">Back to State Details</a><br />
 
   <h1>New Territory</h1>
 
