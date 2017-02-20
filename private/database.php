@@ -28,7 +28,7 @@
 
   function db_fetch_assoc($result_set) {
     $ret = mysqli_fetch_assoc($result_set);
-    if (ret !== false) { // If not empty, sanitize
+    if (!is_null($ret)) { // If not empty, sanitize
       $ret = obj_o($ret);
     }
     return $ret;
