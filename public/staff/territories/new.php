@@ -20,6 +20,7 @@ if(is_post_request()) {
   if(isset($_POST['name'])) { $territory['name'] = $_POST['name']; }
   if(isset($_POST['position'])) { $territory['position'] = $_POST['position']; }
   if(isset($_GET['id'])) { $territory['state_id'] = $_GET['id']; }
+  obj_o($territory);
 
   $result = insert_territory($territory);
   if($result === true) {
