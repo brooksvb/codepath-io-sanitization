@@ -1,11 +1,14 @@
 <?php require_once('../../../private/initialize.php'); ?>
 
 <?php
-if(!isset($_GET['id'])) {
-  redirect_to('index.php');
+if (!isset($_GET['id'])) {
+  redirect_to('../state/index.php');
 }
 $id = $_GET['id'];
 $territory_result = find_territory_by_id($id);
+if (db_num_rows($territory_result) === 0) { // If no entries found
+  redirect_to('../state/index.php');
+}
 // No loop, only one result
 $territory = db_fetch_assoc($territory_result);
 $state_id = $territory['state_id'];

@@ -16,6 +16,16 @@
   // STATE QUERIES
   //
 
+  // My custom validation
+  function state_id_exists($id) {
+    $result = find_state_by_id($id);
+    if (db_num_rows($result) === 0) { // If no entries found
+      $ret = true;
+    } else $ret = false;
+    db_free_result($result);
+    return $ret;
+  }
+
   // Find all states, ordered by name
   function find_all_states() {
     global $db;
@@ -45,17 +55,22 @@
   }
 
   function validate_state($state, $errors=array()) {
-    // TODO add validations
     if (is_blank($state['name'])) {
       $errors[] = "Name cannot be blank.";
-    } elseif (!has_length($state['name'], array('min' => 2, 'max' => 255))) {
-      $errors[] = "Name must be between 2 and 255 characters.";
+    } elseif (!has_length($state['name'], array('min' => 2, 'max' => 25))) {
+      // My custom validation: Max is 25 characters
+      $errors[] = "Name must be between 2 and 25 characters.";
+    } else if (!valid_name_format($state['name'])) {
+      $errors[] = "Name must only contain letters, spaces, and apostrophes.";
     }
 
     if (is_blank($state['code'])) {
       $errors[] = "Code cannot be blank.";
-    } elseif (!has_length($state['code'], array('min' => 2, 'max' => 255))) {
-      $errors[] = "Code must be between 2 and 255 characters.";
+    } elseif (!has_length($state['code'], array('min' => 2, 'max' => 10))) {
+      // My custom validation: Max is 10 characters
+      $errors[] = "Code must be between 2 and 10 characters.";
+    } else if (!valid_name_format($state['code'])) {
+      $errors[] = "Code must only contain letters, spaces, and apostrophes.";
     }
 
     return $errors;
@@ -148,20 +163,29 @@
     // TODO add validations
     if (is_blank($territory['name'])) {
       $errors[] = "Name cannot be blank.";
-    } elseif (!has_length($territory['name'], array('min' => 2, 'max' => 255))) {
-      $errors[] = "Name must be between 2 and 255 characters.";
+    } elseif (!has_length($territory['name'], array('min' => 2, 'max' => 25))) {
+      // My custom validation: I feel like 25 should be more than enough characters for any territory name
+      $errors[] = "Name must be between 2 and 25 characters.";
+    } else if (!valid_name_format($territory['name'])) {
+      $errors[] = "Name should only contain letters, spaces, and apostrophes.";
     }
 
     if (is_blank($territory['position'])) {
       $errors[] = "Position cannot be blank.";
     } elseif (!has_length($territory['position'], array('min' => 2, 'max' => 255))) {
       $errors[] = "Position must be between 2 and 255 characters.";
+    } else if (!valid_number_format($territory['position'])) {
+      $errors[] = "Position should only contain numeric characters.";
     }
 
+    // This block shouldn't be relevant, because the state id should never be able
+    // to be entered by a user. Left here for good measures
     if (is_blank($territory['state_id'])) {
       $errors[] = "State id cannot be blank.";
     } elseif (!has_length($territory['state_id'], array('min' => 1, 'max' => 255))) {
       $errors[] = "State id must be between 1 and 255 characters.";
+    } else if (!valid_number_format($territory['state_id'])) {
+      $errors[] = "State id must only contain numeric characters.";
     }
 
     return $errors;
@@ -261,24 +285,33 @@
       $errors[] = "First name cannot be blank.";
     } elseif (!has_length($salesperson['first_name'], array('min' => 2, 'max' => 255))) {
       $errors[] = "First name must be between 2 and 255 characters.";
+    } else if (!valid_name_format($salesperson['first_name'])) {
+      $errors[] = "First name must only contain letters, spaces, and apostrophes.";
     }
 
     if (is_blank($salesperson['last_name'])) {
       $errors[] = "Last name cannot be blank.";
     } elseif (!has_length($salesperson['last_name'], array('min' => 2, 'max' => 255))) {
       $errors[] = "Last name must be between 2 and 255 characters.";
+    } else if (!valid_name_format($salesperson['last_name'])) {
+      $errors[] = "Last name must only contain letters, spaces, and apostrophes.";
     }
 
     if (is_blank($salesperson['email'])) {
       $errors[] = "Email cannot be blank.";
-    } elseif (!has_valid_email_format($salesperson['email'])) {
-      $errors[] = "Email must be a valid format.";
+    } else if (!has_length($salesperson['email'], array('min' => 5, 'max' => 35))) {
+      // My custom validation: Bounds for the smallest possible email, and the reasonable max
+      $errors[] = "Email must be between 5 and 35 characters.";
+    } else if (!valid_email_format($salesperson['email'])) {
+      $errors[] = "Email must be a valid format. Only letters, numbers, @, _, and . symbols allowed. Ex. user@site.domain";
     }
 
     if (is_blank($salesperson['phone'])) {
       $errors[] = "Phone cannot be blank.";
-    } elseif (!has_length($salesperson['phone'], array('max' => 255))) {
-      $errors[] = "Phone must be less than 255 characters.";
+    } elseif (!has_length($salesperson['phone'], array('min' => 10, 'max' => 15))) {
+      $errors[] = "Phone must be between 10 and 20 characters. Please include area code.";
+    } else if (!valid_phone_format($salesperson['phone'])) {
+      $errors[] = "Invalid phone format. Only numbers, (), and - symbols allowed.";
     }
 
     return $errors;
@@ -378,27 +411,39 @@
   function validate_user($user, $errors=array()) {
     if (is_blank($user['first_name'])) {
       $errors[] = "First name cannot be blank.";
-    } elseif (!has_length($user['first_name'], array('min' => 2, 'max' => 255))) {
-      $errors[] = "First name must be between 2 and 255 characters.";
+    } elseif (!has_length($user['first_name'], array('min' => 2, 'max' => 25))) {
+      // My custom validation: Reasonable bounds for username length
+      $errors[] = "First name must be between 2 and 25 characters.";
+    } else if (!valid_name_format($user['first_name'])) {
+      $errors[] = "First name must only contain letters, spaces, and apostrophes.";
     }
 
     if (is_blank($user['last_name'])) {
       $errors[] = "Last name cannot be blank.";
-    } elseif (!has_length($user['last_name'], array('min' => 2, 'max' => 255))) {
-      $errors[] = "Last name must be between 2 and 255 characters.";
+    } elseif (!has_length($user['last_name'], array('min' => 2, 'max' => 25))) {
+      $errors[] = "Last name must be between 2 and 25 characters.";
+    } else if (!valid_name_format($user['last_name'])) {
+      $errors[] = "Last name must only contain letters, spaces, and apostrophes.";
     }
 
     if (is_blank($user['email'])) {
       $errors[] = "Email cannot be blank.";
-    } elseif (!has_valid_email_format($user['email'])) {
-      $errors[] = "Email must be a valid format.";
+    } else if (!has_length($user['email'], array('min' => 5, 'max' => 35))) {
+      // My custom validation: Bounds for the smallest possible email, and the reasonable max
+      $errors[] = "Email must be between 5 and 35 characters.";
+    } else if (!has_valid_email_format($user['email'])) {
+      $errors[] = "Email must be a valid format. Only letters, numbers, @, _, and . symbols allowed. Ex. user@site.domain";
     }
 
     if (is_blank($user['username'])) {
       $errors[] = "Username cannot be blank.";
-    } elseif (!has_length($user['username'], array('max' => 255))) {
-      $errors[] = "Username must be less than 255 characters.";
+    } else if (!has_length($user['username'], array('min' => 2, 'max' => 25))) {
+      // My custom validation: Reasonable bounds for username
+      $errors[] = "Username must be between 2 and 25 characters.";
+    } else if (!valid_username_format($user['username'])) {
+      $errors[] = "Invalid username format. Only letters, numbers, and _ symbols allowed.";
     }
+    
     return $errors;
   }
 

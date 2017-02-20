@@ -1,7 +1,8 @@
 <?php
 require_once('../../../private/initialize.php');
 
-if (!isset($_GET['id'])) { // Must have a state id for context
+// My custom validation: Ensure that the given state id exists
+if (!isset($_GET['id']) || !state_id_exists($_GET['id'])) { // Must have a state id for context
   redirect_to('../states/index.php');
 }
 
