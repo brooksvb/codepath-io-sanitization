@@ -35,7 +35,7 @@
 
   function valid_phone_format($phone) {
     // One or more whitelisted characters
-    $regexp = '/\A[0-9\s\( \) \_]+\Z/';
+    $regexp = '/\A[0-9\s\( \) \-]+\Z/';
     return preg_match($regexp, $phone);
   }
 
