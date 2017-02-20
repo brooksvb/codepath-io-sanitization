@@ -69,7 +69,7 @@ The following advanced user stories are optional:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/YdeRdfp.gifv' title='Video Walkthrough' width='400px' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/YdeRdfp.gif' title='Video Walkthrough' width='400px' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
