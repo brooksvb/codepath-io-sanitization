@@ -27,7 +27,11 @@
   }
 
   function db_fetch_assoc($result_set) {
-    return obj_o(mysqli_fetch_assoc($result_set));
+    $ret = mysqli_fetch_assoc($result_set);
+    if (ret !== false) { // If not empty, sanitize
+      $ret = obj_o($ret);
+    }
+    return $ret;
   }
 
   function db_free_result($result_set) {
