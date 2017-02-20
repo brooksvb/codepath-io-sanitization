@@ -77,6 +77,9 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Describe any challenges encountered while building the app.
 
+- I wish I could have figured out a better way to structure sanitization so that I didn't have to change anything in each page
+
+
 ## License
 
     Copyright [2017] [William Brooks Van Buren]
