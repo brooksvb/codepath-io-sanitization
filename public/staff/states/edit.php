@@ -21,7 +21,6 @@ if(is_post_request()) {
   if(isset($_POST['code'])) { $state['code'] = $_POST['code']; }
   $state = obj_o($state);
 
-
   $result = update_state($state);
   if($result === true) {
     redirect_to('show.php?id=' . u($state['id']));
