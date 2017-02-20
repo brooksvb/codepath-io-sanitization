@@ -87,7 +87,7 @@
     }
 
     $sql = "INSERT INTO states (name, code)";
-    $sql .= "VALUES ('". i($state['name']) ."', '". i($state['code']) ."')";    // For INSERT statments, $result is just true/false
+    $sql .= "VALUES ('". db_escape($db, i($state['name'])) ."', '". db_escape($db, i($state['code'])) ."')";    // For INSERT statments, $result is just true/false
     $result = db_query($db, $sql);
     if($result) {
       return true;
@@ -111,9 +111,9 @@
     }
 
     $sql = "UPDATE states SET ";
-    $sql .= "name='" . db_escape(i($state['name'])) . "', ";
-    $sql .= "code='" . db_escape(i($state['code'])) . "' ";
-    $sql .= "WHERE id='" . db_escape(i($state['id'])) . "' ";
+    $sql .= "name='" . db_escape($db, i($state['name'])) . "', ";
+    $sql .= "code='" . db_escape($db, i($state['code'])) . "' ";
+    $sql .= "WHERE id='" . db_escape($db, i($state['id'])) . "' ";
     $sql .= "LIMIT 1;";    // For update_state statments, $result is just true/false
     $result = db_query($db, $sql);
     if($result) {
