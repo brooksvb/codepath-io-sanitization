@@ -81,6 +81,8 @@ Describe any challenges encountered while building the app.
 I didn't have to change anything in each page.
 - I figured out that the best place to sanitize an object was in the db_fetch_assoc.
 This would have prevented a lot of work if I started with this approach.
+- I had a misunderstanding of how to use mysqli_real_escape_string, and used it on my
+entire sql query string, instead of each variable input
 
 Bugs / Vulnerabilities Found:
 
