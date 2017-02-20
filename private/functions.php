@@ -36,4 +36,27 @@
     return $output;
   }
 
+  /*
+    @function: Sanitize any input
+  */
+  function i($string) {
+    $string = strip_tags($string);
+    // QUESTION: Is it bad practice to store html entities in the database?
+    // After thinking of any possible issues, it seems like the only time it would
+    // matter is if you're looking directly at db data and not through an html page
+    $string = htmlentities($string);
+    return $string;
+  }
+
+  /*
+    @function: Sanitize any output on the page
+  */
+  function o($string) {
+    $string = strip_tags($string);
+    // QUESTION: Not sure if htmlspecialchars or htmlentities is better here.
+    // I decided to use html entities because it is even more restrictive.
+    $string = htmlentities($string);
+    return $string;
+  }
+
 ?>

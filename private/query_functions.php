@@ -87,7 +87,7 @@
     }
 
     $sql = "INSERT INTO states (name, code)";
-    $sql .= "VALUES ('".$state['name']."', '".$state['code']."')";    // For INSERT statments, $result is just true/false
+    $sql .= "VALUES ('". i($state['name']) ."', '". i($state['code']) ."')";    // For INSERT statments, $result is just true/false
     $result = db_query($db, $sql);
     if($result) {
       return true;
@@ -111,9 +111,9 @@
     }
 
     $sql = "UPDATE states SET ";
-    $sql .= "name='" . $state['name'] . "', ";
-    $sql .= "code='" . $state['code'] . "' ";
-    $sql .= "WHERE id='" . $state['id'] . "' ";
+    $sql .= "name='" . i($state['name']) . "', ";
+    $sql .= "code='" . i($state['code']) . "' ";
+    $sql .= "WHERE id='" . i($state['id']) . "' ";
     $sql .= "LIMIT 1;";    // For update_state statments, $result is just true/false
     $result = db_query($db, $sql);
     if($result) {
@@ -202,7 +202,8 @@
     }
 
     $sql = "INSERT INTO territories (name, position, state_id)";
-    $sql .= "VALUES ('".$territory['name']."', '".$territory['position']."', '".$territory['state_id']."')";    // For INSERT statments, $result is just true/false
+    $sql .= "VALUES ('". i($territory['name']) ."', '";
+    $sql .= i($territory['position']) ."', '". i($territory['state_id']) ."')";    // For INSERT statments, $result is just true/false
     $result = db_query($db, $sql);
     if($result) {
       return true;
@@ -226,9 +227,9 @@
     }
 
     $sql = "UPDATE territories SET ";
-    $sql .= "name='" . $territory['name'] . "', ";
-    $sql .= "position='" . $territory['position'] . "' ";
-    $sql .= "WHERE id='" . $territory['id'] . "' ";
+    $sql .= "name='" . i($territory['name']) . "', ";
+    $sql .= "position='" . i($territory['position']) . "' ";
+    $sql .= "WHERE id='" . i($territory['id']) . "' ";
     $sql .= "LIMIT 1;";
     // For update_territory statments, $result is just true/false
     $result = db_query($db, $sql);
@@ -264,7 +265,7 @@
     $sql = "SELECT * FROM salespeople ";
     $sql .= "LEFT JOIN salespeople_territories
               ON (salespeople_territories.salesperson_id = salespeople.id) ";
-    $sql .= "WHERE salespeople_territories.territory_id='" . $territory_id . "' ";
+    $sql .= "WHERE salespeople_territories.territory_id='" . i($territory_id) . "' ";
     $sql .= "ORDER BY last_name ASC, first_name ASC;";
     $salespeople_result = db_query($db, $sql);
     return $salespeople_result;
@@ -274,7 +275,7 @@
   function find_salesperson_by_id($id=0) {
     global $db;
     $sql = "SELECT * FROM salespeople ";
-    $sql .= "WHERE id='" . $id . "';";
+    $sql .= "WHERE id='" . i($id) . "';";
     $salespeople_result = db_query($db, $sql);
     return $salespeople_result;
   }
@@ -328,7 +329,9 @@
     }
 
     $sql = "INSERT INTO salespeople (first_name, last_name, phone, email)";
-    $sql .= "VALUES ('".$salesperson['first_name']."', '".$salesperson['last_name']."', '".$salesperson['phone']."', '".$salesperson['email']."')";
+    $sql .= "VALUES ('". i($salesperson['first_name']) ."', '";
+    $sql .= i($salesperson['last_name']) ."', '". i($salesperson['phone']);
+    $sql .= "', '". i($salesperson['email']) ."')";
     // For INSERT statments, $result is just true/false
     $result = db_query($db, $sql);
     if($result) {
@@ -353,11 +356,11 @@
     }
 
     $sql = "UPDATE salespeople SET ";
-    $sql .= "first_name='" . $salesperson['first_name'] . "', ";
-    $sql .= "last_name='" . $salesperson['last_name'] . "', ";
-    $sql .= "email='" . $salesperson['email'] . "', ";
-    $sql .= "phone='" . $salesperson['phone'] . "' ";
-    $sql .= "WHERE id='" . $salesperson['id'] . "' ";
+    $sql .= "first_name='" . i($salesperson['first_name']) . "', ";
+    $sql .= "last_name='" . i($salesperson['last_name']) . "', ";
+    $sql .= "email='" . i($salesperson['email']) . "', ";
+    $sql .= "phone='" . i($salesperson['phone']) . "' ";
+    $sql .= "WHERE id='" . i($salesperson['id']) . "' ";
     $sql .= "LIMIT 1;";
 
     // For update_salesperson statments, $result is just true/false
@@ -381,7 +384,7 @@
     $sql = "SELECT * FROM territories ";
     $sql .= "LEFT JOIN salespeople_territories
               ON (territories.id = salespeople_territories.territory_id) ";
-    $sql .= "WHERE salespeople_territories.salesperson_id='" . $id . "' ";
+    $sql .= "WHERE salespeople_territories.salesperson_id='" . i($id) . "' ";
     $sql .= "ORDER BY territories.name ASC;";
     $territories_result = db_query($db, $sql);
     return $territories_result;
@@ -403,7 +406,7 @@
   // Find user using id
   function find_user_by_id($id=0) {
     global $db;
-    $sql = "SELECT * FROM users WHERE id='" . $id . "' LIMIT 1;";
+    $sql = "SELECT * FROM users WHERE id='" . i($id) . "' LIMIT 1;";
     $users_result = db_query($db, $sql);
     return $users_result;
   }
@@ -443,7 +446,7 @@
     } else if (!valid_username_format($user['username'])) {
       $errors[] = "Invalid username format. Only letters, numbers, and _ symbols allowed.";
     }
-    
+
     return $errors;
   }
 
@@ -461,10 +464,10 @@
     $sql = "INSERT INTO users ";
     $sql .= "(first_name, last_name, email, username, created_at) ";
     $sql .= "VALUES (";
-    $sql .= "'" . $user['first_name'] . "',";
-    $sql .= "'" . $user['last_name'] . "',";
-    $sql .= "'" . $user['email'] . "',";
-    $sql .= "'" . $user['username'] . "',";
+    $sql .= "'" . i($user['first_name']) . "',";
+    $sql .= "'" . i($user['last_name']) . "',";
+    $sql .= "'" . i($user['email']) . "',";
+    $sql .= "'" . i($user['username']) . "',";
     $sql .= "'" . $created_at . "',";
     $sql .= ");";
     // For INSERT statments, $result is just true/false
@@ -491,11 +494,11 @@
     }
 
     $sql = "UPDATE users SET ";
-    $sql .= "first_name='" . $user['first_name'] . "', ";
-    $sql .= "last_name='" . $user['last_name'] . "', ";
-    $sql .= "email='" . $user['email'] . "', ";
-    $sql .= "username='" . $user['username'] . "' ";
-    $sql .= "WHERE id='" . $user['id'] . "' ";
+    $sql .= "first_name='" . i($user['first_name']) . "', ";
+    $sql .= "last_name='" . i($user['last_name']) . "', ";
+    $sql .= "email='" . i($user['email']) . "', ";
+    $sql .= "username='" . i($user['username']) . "' ";
+    $sql .= "WHERE id='" . i($user['id']) . "' ";
     $sql .= "LIMIT 1;";
     // For update_user statments, $result is just true/false
     $result = db_query($db, $sql);
