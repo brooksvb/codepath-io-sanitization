@@ -1,4 +1,4 @@
-<?php require_once('../../private/initialize.php'); ?>
+<?php require_once('./../private/initialize.php'); ?>
 
 <?php $page_title = 'Globitek CMS: Menu'; ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
