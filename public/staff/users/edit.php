@@ -22,7 +22,7 @@ if(is_post_request()) {
 
   $result = update_user($user);
   if($result === true) {
-    redirect_to('show.php?id=' . $user['id']);
+    redirect_to('show.php?id=' . u($user['id']));
   } else {
     $errors = $result;
   }
@@ -38,7 +38,7 @@ if(is_post_request()) {
 
   <?php echo display_errors($errors); ?>
 
-  <form action="edit.php?id=<?php echo $user['id']; ?>" method="post">
+  <form action="edit.php?id=<?php echo u($user['id'])s; ?>" method="post">
     First name:<br />
     <input type="text" name="first_name" value="<?php echo $user['first_name']; ?>" /><br />
     Last name:<br />

@@ -23,7 +23,7 @@ if(is_post_request()) {
 
   $result = update_state($state);
   if($result === true) {
-    redirect_to('show.php?id=' . $state['id']);
+    redirect_to('show.php?id=' . u($state['id']));
   } else {
     $errors = $result;
   }
@@ -40,7 +40,7 @@ if(is_post_request()) {
 
   <?php echo display_errors($errors); ?>
 
-  <form action="edit.php?id=<?php echo $state['id'] ?>" method="post">
+  <form action="edit.php?id=<?php echo u($state['id']) ?>" method="post">
     Name:<br />
     <input type="text" name="name" value="<?php echo $state['name']; ?>" /><br />
     Code:<br />

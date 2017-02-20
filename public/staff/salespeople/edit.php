@@ -25,7 +25,7 @@ if(is_post_request()) {
 
   $result = update_salesperson($salesperson);
   if($result === true) {
-    redirect_to('show.php?id=' . $salesperson['id']);
+    redirect_to('show.php?id=' . u($salesperson['id']));
   } else {
     $errors = $result;
   }
@@ -41,8 +41,7 @@ if(is_post_request()) {
 
   <?php echo display_errors($errors); ?>
 
-  <!-- TODO add form -->
-  <form action="edit.php?id=<?php echo $salesperson['id'] ?>" method="post">
+  <form action="edit.php?id=<?php echo u($salesperson['id']) ?>" method="post">
     First name:<br />
     <input type="text" name="first_name" value="<?php echo $salesperson['first_name']; ?>" /><br />
     Last name:<br />

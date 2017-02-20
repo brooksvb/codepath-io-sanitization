@@ -24,7 +24,7 @@ if(is_post_request()) {
   $result = insert_territory($territory);
   if($result === true) {
     $new_id = db_insert_id($db); // Get the id of the last entry
-    redirect_to('show.php?id=' . $new_id);
+    redirect_to('show.php?id=' . u($new_id));
   } else {
     $errors = $result;
   }
@@ -35,13 +35,13 @@ if(is_post_request()) {
 <?php include(SHARED_PATH . '/header.php'); ?>
 
 <div id="main-content">
-  <a href="../states/show.php?id=<?php echo $_GET['id']; ?>">Back to State Details</a><br />
+  <a href="../states/show.php?id=<?php echo u($_GET['id']); ?>">Back to State Details</a><br />
 
   <h1>New Territory</h1>
 
   <?php echo display_errors($errors); ?>
 
-  <form action="new.php?id=<?php echo $id; ?>" method="post">
+  <form action="new.php?id=<?php echo u($id); ?>" method="post">
     Name:<br />
     <input type="text" name="name" value="<?php echo $territory['name']; ?>" /><br />
     Position:<br />

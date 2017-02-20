@@ -20,7 +20,7 @@ if(is_post_request()) {
 
   $result = update_territory($territory);
   if($result === true) {
-    redirect_to('show.php?id=' . $territory['id']);
+    redirect_to('show.php?id=' . u($territory['id']));
   } else {
     $errors = $result;
   }
@@ -36,7 +36,7 @@ if(is_post_request()) {
 
   <h1>Edit Territory: <?php echo $territory['name']; ?></h1>
 
-  <form action="edit.php?id=<?php echo $_GET['id']; ?>" method="post">
+  <form action="edit.php?id=<?php echo u($_GET['id']); ?>" method="post">
     Name:<br />
     <input type="text" name="name" value="<?php echo $territory['name']; ?>" /><br />
     Position:<br />

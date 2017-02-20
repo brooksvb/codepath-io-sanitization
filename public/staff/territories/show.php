@@ -42,7 +42,7 @@ $state_id = $territory['state_id'];
     db_free_result($territory_result);
   ?>
   <br />
-  <a href="./edit.php?id=<?php echo $territory['id']; ?>">Edit</a><br />
+  <a href="./edit.php?id=<?php echo u($territory['id']); ?>">Edit</a><br />
 
 </div>
 

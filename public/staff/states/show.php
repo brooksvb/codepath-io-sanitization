@@ -38,12 +38,12 @@ $state = db_fetch_assoc($state_result);
     echo "</table>";
 ?>
     <br />
-    <a href="./edit.php?id=<?php echo $state['id']; ?>">Edit</a><br />
+    <a href="./edit.php?id=<?php echo u($state['id']); ?>">Edit</a><br />
     <hr />
 
     <h2>Territories</h2>
     <br />
-    <a href="../territories/new.php?id=<?php echo $state['id'] ?>">Add a Territory</a><br />
+    <a href="../territories/new.php?id=<?php echo u($state['id']); ?>">Add a Territory</a><br />
 
 <?php
     $territory_result = find_territories_for_state_id($state['id']);

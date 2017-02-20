@@ -17,11 +17,11 @@ if(is_post_request()) {
   if(isset($_POST['last_name'])) { $salesperson['last_name'] = $_POST['last_name']; }
   if(isset($_POST['email'])) { $salesperson['email'] = $_POST['email']; }
   if(isset($_POST['phone'])) { $salesperson['phone'] = $_POST['phone']; }
-  
+
   $result = insert_salesperson($salesperson);
   if($result === true) {
     $new_id = db_insert_id($db); // Get the id of the last entry
-    redirect_to('show.php?id=' . $new_id);
+    redirect_to('show.php?id=' . u($new_id));
   } else {
     $errors = $result;
   }
