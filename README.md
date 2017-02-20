@@ -79,9 +79,13 @@ Describe any challenges encountered while building the app.
 
 - I wish I could have figured out a better way to structure sanitization so that
 I didn't have to change anything in each page.
-- I figured out that the best place to sanitize an object was in the db_fetch_assoc. 
+- I figured out that the best place to sanitize an object was in the db_fetch_assoc.
 This would have prevented a lot of work if I started with this approach.
 
+Bugs / Vulnerabilities Found:
+
+- Putting an html tag in a name input will cause the page to not display correctly
+because the POST data is not sanitized before being redisplayed.
 
 ## License
 
