@@ -335,6 +335,7 @@
     $sql .= "VALUES ('". i($salesperson['first_name']) ."', '";
     $sql .= i($salesperson['last_name']) ."', '". i($salesperson['phone']);
     $sql .= "', '". i($salesperson['email']) ."')";
+    $sql = db_escape($db, $sql);
     // For INSERT statments, $result is just true/false
     $result = db_query($db, $sql);
     if($result) {
@@ -365,6 +366,7 @@
     $sql .= "phone='" . i($salesperson['phone']) . "' ";
     $sql .= "WHERE id='" . i($salesperson['id']) . "' ";
     $sql .= "LIMIT 1;";
+    $sql = db_escape($db, $sql);
 
     // For update_salesperson statments, $result is just true/false
     $result = db_query($db, $sql);
@@ -389,6 +391,8 @@
               ON (territories.id = salespeople_territories.territory_id) ";
     $sql .= "WHERE salespeople_territories.salesperson_id='" . i($id) . "' ";
     $sql .= "ORDER BY territories.name ASC;";
+    $sql = db_escape($db, $sql);
+
     $territories_result = db_query($db, $sql);
     return $territories_result;
   }
@@ -410,6 +414,8 @@
   function find_user_by_id($id=0) {
     global $db;
     $sql = "SELECT * FROM users WHERE id='" . i($id) . "' LIMIT 1;";
+    $sql = db_escape($db, $sql);
+
     $users_result = db_query($db, $sql);
     $users_result = obj_o($users_result);
     return $users_result;
@@ -474,6 +480,8 @@
     $sql .= "'" . i($user['username']) . "',";
     $sql .= "'" . $created_at . "',";
     $sql .= ");";
+    $sql = db_escape($db, $sql);
+
     // For INSERT statments, $result is just true/false
     $result = db_query($db, $sql);
     if($result) {
@@ -504,6 +512,8 @@
     $sql .= "username='" . i($user['username']) . "' ";
     $sql .= "WHERE id='" . i($user['id']) . "' ";
     $sql .= "LIMIT 1;";
+    $sql = db_escape($db, $sql);
+
     // For update_user statments, $result is just true/false
     $result = db_query($db, $sql);
     if($result) {
