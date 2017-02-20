@@ -20,8 +20,8 @@
   function state_id_exists($id) {
     $result = find_state_by_id($id);
     if (db_num_rows($result) === 0) { // If no entries found
-      $ret = true;
-    } else $ret = false;
+      $ret = false;
+    } else $ret = true;
     db_free_result($result);
     return $ret;
   }

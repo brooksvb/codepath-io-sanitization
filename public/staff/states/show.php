@@ -9,6 +9,7 @@ $state_result = find_state_by_id($id);
 if (db_num_rows($state_result) === 0) { // If no entries found
   redirect_to('index.php');
 }
+
 // No loop, only one result
 $state = db_fetch_assoc($state_result);
 ?>
